@@ -1,0 +1,8 @@
+sas@gmail.com
+1234
+
+sasnitkkr@yahoo.com
+1245
+
+.env file
+SECRET=ThisisAbraKaDabraSecret

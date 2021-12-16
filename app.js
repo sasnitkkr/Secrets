@@ -1,3 +1,4 @@
+require('dotenv').config(); // must be as early as possible in app
 const express = require("express");
 const ejs = require("ejs");
 const bodyParser = require("body-parser");
@@ -24,9 +25,8 @@ const userSchema = new mongoose.Schema({
     During save, documents are encrypted and then signed.
     During find, documents are authenticated and then decrypted.
 */
-const secret = "ThisisAbraKaDabraSecret";
 
-userSchema.plugin(encrypt, {secret : secret, encryptedFields:['password']});    
+userSchema.plugin(encrypt, {secret : process.env.SECRET, encryptedFields:['password']});    
 
 const User = mongoose.model('User', userSchema);
 
