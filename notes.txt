@@ -4,5 +4,8 @@ sas@gmail.com
 sasnitkkr@yahoo.com
 1245
 
+sas@hash.com
+123456
+
 .env file
 SECRET=ThisisAbraKaDabraSecret
