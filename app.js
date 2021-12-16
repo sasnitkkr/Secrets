@@ -2,6 +2,7 @@ const express = require("express");
 const ejs = require("ejs");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const encrypt = require('mongoose-encryption');
 const PORT = 3000;
 
 const app = express();
@@ -13,10 +14,19 @@ app.use(bodyParser.urlencoded({extended:true}));
 /////////////// Connect to Database ///////////////
 mongoose.connect('mongodb://localhost:27017/userDB', {useNewUrlParser: true});
 
-const userSchema = {
+const userSchema = new mongoose.Schema({
     email : String,
     password :  String
-}
+});
+
+/////////////// Using Mongoose Encryption ///////////////
+/* 
+    During save, documents are encrypted and then signed.
+    During find, documents are authenticated and then decrypted.
+*/
+const secret = "ThisisAbraKaDabraSecret";
+
+userSchema.plugin(encrypt, {secret : secret, encryptedFields:['password']});    
 
 const User = mongoose.model('User', userSchema);
 
@@ -52,6 +62,7 @@ app.post("/register", function(req, res){
 });
 
 app.post("/login", function(req, res){
+
     const username = req.body.username;
     const password = req.body.password;
 
@@ -77,4 +88,4 @@ app.post("/login", function(req, res){
 
 app.listen(PORT, function(){
     console.log("App started at port" + PORT);
-})
+});
