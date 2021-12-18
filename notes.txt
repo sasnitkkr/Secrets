@@ -10,5 +10,8 @@ sas@hash.com
 sas@bcryptsalt.com
 123456
 
+sas@passportlocalmongoose.com
+123456
+
 .env file
 SECRET=ThisisAbraKaDabraSecret
